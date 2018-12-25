@@ -10,7 +10,6 @@ Window操作模块
 4、可上传文件到服务器
 """
 
-
 import paramiko
 from auto_utils import common
 import os
@@ -45,7 +44,7 @@ class OsConnect:
         :param file_name: 文件名称，上传文件路径在software目录
         :return:None
         """
-        print u'开始上传文件！'
+        print(u'开始上传文件！')
         file_name = file_name.decode('utf-8')
         l_path = common.get_project_path() + 'auto_utils/env_install/software/' + file_name
         r_path = '/' + file_name
@@ -54,7 +53,7 @@ class OsConnect:
         sftp = paramiko.SFTPClient.from_transport(t)
         sftp.put(l_path, r_path)
         t.close()
-        print u'文件上传完毕！'
+        print(u'文件上传完毕！')
 
     def download(self, remote_dir, local_dir, f=None):
         """
@@ -73,11 +72,11 @@ class OsConnect:
             else:
                 files = sftp.listdir(remote_dir)
             for f in files:
-                print 'Downloading file:', os.path.join(remote_dir, f)
+                print('Downloading file:', os.path.join(remote_dir, f))
                 sftp.get(os.path.join(remote_dir, f), os.path.join(local_dir, f))
             t.close()
-        except Exception, e:
-               print "download error,%s!" % e
+        except Exception as e:
+               print("download error,%s!" % e)
 
     def exec_commands(self, commands, sec=3):
         """
@@ -92,13 +91,11 @@ class OsConnect:
         ssh = s.invoke_shell()
         ssh.settimeout(sec)
         for command in commands:
-            print u'执行%s命令。' % command
+            print(u'执行%s命令。' % command)
             ssh.send(command)
             out = ssh.recv(1024)
-            print out
+            print(out)
 
 
 if __name__ == '__main__':
     o = OsConnect()
-    print o.exec_command(r'cmd.exe /c dir')
-    # o.download('/backup', '/')
