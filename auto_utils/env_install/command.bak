@@ -1,0 +1,3 @@
+taskkill -f /im HWP.BusinessBatch.exe
+
+net start Hwp.Scheduler

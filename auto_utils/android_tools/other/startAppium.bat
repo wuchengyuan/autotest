@@ -1,0 +1,1 @@
+appium -a 127.0.0.1 -p 4723 -bp 4701 -U 25b389ad --session-override --log "../result/appium.txt" --command-timeout 600
