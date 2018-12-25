@@ -238,8 +238,4 @@ def db_update(sql):
 
 
 if __name__ == '__main__':
-    # logging.basicConfig(level=logging.DEBUG)
-    create_engine('hwp_test', 'Hwp_test@123456', 'hwp_test', host='192.168.99.30', port=3307)
-    x = db_select('SELECT mem_id from t11_member LIMIT 1')
-    db_update("DELETE from t11_member where mobile = '18911112222'")
-    # print update('DELETE from taborder where UUID = "a"')
+    logging.basicConfig(level=logging.DEBUG)

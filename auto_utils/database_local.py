@@ -238,5 +238,3 @@ def db_update(sql):
 
 if __name__ == '__main__':
     logging.basicConfig(level=logging.DEBUG)
-    create_engine('hwp_test', 'Hwp_test@123456', 'hwp_test', host='192.168.99.30', port=3307)
-    print(db_select('SELECT mem_id from t11_member LIMIT 1'))
