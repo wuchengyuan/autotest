@@ -142,8 +142,8 @@ def del_black_friend():
                         element.click()
                         send_msg(driver)
                         result = need_del(driver)
-                        # if result:
-                        #     del_friend(driver, name)
+                        if result:
+                            del_friend(driver, name)
                         back_contacts_page(driver)
                 driver.swipe2down()
             else:
