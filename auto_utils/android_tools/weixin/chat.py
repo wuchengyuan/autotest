@@ -107,7 +107,7 @@ def chat_all_friend():
                         element = move2user_display(driver, name)
                         contacts_name.append(name)
                         element.click()
-                        send_collect_info(driver, '李茶的姑妈')
+                        send_collect_info(driver, '李茶的姑妈1')
                         back_contacts_page(driver)
                 driver.swipe2down()
             else:
