@@ -25,35 +25,45 @@ def send_msg(driver, content='ॣ ॣ ॣ'):
 
 
 def need_del(driver):
+    driver.is_displayed('aid=聊天信息', 10)
     re_send = driver.is_displayed('aid=重发', 2)
-    if re_send:
+    fr_add = driver.is_displayed('ui=new UiSelector().text("对方未添加你为好友")', 2)
+    if re_send or fr_add:
         return True
     else:
         return False
 
 
 def del_friend(driver, name):
-    element = move2user_display(driver, name)
-    element.click()
-    driver.click('aid=更多')
-    driver.click('ui=new UiSelector().text("删除")')
-    if driver.is_displayed('ui=new UiSelector().text("删除联系人")'):
+    try:
+        driver.click('aid=聊天信息')
+        driver.click('id=com.tencent.mm:id/dnr')
+        driver.click('aid=更多')
         driver.click('ui=new UiSelector().text("删除")')
-    else:
-        pass
+        if driver.is_displayed('ui=new UiSelector().text("删除联系人")'):
+            driver.click('ui=new UiSelector().text("删除")')
+        else:
+            pass
+    except Exception as e:
+        logging.error('%s 删除失败，错误信息：%s' % (name, e))
 
 
 def back_contacts_page(driver):
     for i in range(5):
-        result = driver.is_displayed('ui=new UiSelector().text("通讯录")', 1)
+        result = driver.is_displayed('ui=new UiSelector().text("通讯录")', 8)
         if result:
-            contacts_page_flag = driver.is_displayed('id=com.tencent.mm:id/ll', 1)
+            contacts_page_flag = driver.is_displayed('id=com.tencent.mm:id/ll', 3)
             if contacts_page_flag:
                 return True
             else:
                 driver.click('ui=new UiSelector().text("通讯录")')
             return True
-        driver.back()
+        else:
+            current_activity = driver.current_activity
+            if current_activity == 'com.android.launcher2.Launcher':
+                driver.launch_app()
+            else:
+                driver.back()
     logging.error('返回首页失败')
 
 
@@ -108,6 +118,9 @@ def chat_all_friend():
                         contacts_name.append(name)
                         element.click()
                         send_collect_info(driver, '李茶的姑妈1')
+                        result = need_del(driver)
+                        if result is True:
+                            del_friend(driver, name)
                         back_contacts_page(driver)
                 driver.swipe2down()
             else:
@@ -158,4 +171,4 @@ def del_black_friend():
 
 if __name__ == '__main__':
     logging.basicConfig(level=logging.INFO)
-    del_black_friend()
+    chat_all_friend()

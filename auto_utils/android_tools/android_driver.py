@@ -550,4 +550,5 @@ if __name__ == '__main__':
     logging.basicConfig(level=logging.INFO)
     testdriver = AndroidDriver()
     testdriver.open_app('weixin_1320.apk')
-    testdriver.swipe2down()
+    testdriver.launch_app()
+    print(testdriver.current_activity)
