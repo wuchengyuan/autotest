@@ -95,14 +95,15 @@ def contacts_write(contacts):
     path = os.path.dirname(__file__) + '/contacts.txt'
     with open(path, 'w', encoding='utf-8') as f:
         f.write(contacts)
+    logging.info('contacts writed!')
 
 
 def chat_all_friend():
     driver = AndroidDriver()
     driver.open_app('weixin_1320.apk')
-    contacts_name = contacts_read()
     driver.click('ui=new UiSelector().text("通讯录")')
     while True:
+        contacts_name = contacts_read()
         try:
             contacts_page_flag = driver.is_displayed('id=com.tencent.mm:id/ll', 3)
             if contacts_page_flag:
