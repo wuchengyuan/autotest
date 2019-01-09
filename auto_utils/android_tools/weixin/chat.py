@@ -120,7 +120,7 @@ def chat_all_friend():
                         element.click()
                         send_collect_info(driver, '李茶的姑妈1')
                         result = need_del(driver)
-                        if result is True:
+                        if result:
                             del_friend(driver, name)
                         back_contacts_page(driver)
                 driver.swipe2down()

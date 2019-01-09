@@ -128,7 +128,7 @@ def group_chat_add_friend():
         members_count = int(members_count.group())
         logging.info('group member count: %s' % members_count)
         while True:
-            members = driver.find_type('id=com.tencent.mm:id/aq_')
+            members = driver.find_type('id=com.tencent.mm:id/ats')
             for member in members:
                 try:
                     name = member.text
@@ -207,7 +207,7 @@ def get_all_group_name(driver):
     group_names = []
     while True:
         group_num = len(group_names)
-        elements = driver.find_type('id=com.tencent.mm:id/m6')
+        elements = driver.find_type('id=com.tencent.mm:id/my')
         for element in elements:
             group_name = element.text
             if group_name not in group_names:
@@ -227,7 +227,7 @@ def move2group_display(driver, group_name):
         if result:
             break
     while True:
-        elements = driver.find_type('id=com.tencent.mm:id/m6')
+        elements = driver.find_type('id=com.tencent.mm:id/my')
         for element in elements:
             current_name = element.text
             if current_name == group_name:
