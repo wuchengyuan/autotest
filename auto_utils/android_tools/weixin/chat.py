@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 from auto_utils.android_tools.android_driver import *
-
+from auto_utils.android_tools.weixin import *
 
 def send_collect_info(driver, name):
     driver.click('ui=new UiSelector().text("发消息")')
@@ -48,23 +48,7 @@ def del_friend(driver, name):
         logging.error('%s 删除失败，错误信息：%s' % (name, e))
 
 
-def back_contacts_page(driver):
-    for i in range(5):
-        result = driver.is_displayed('ui=new UiSelector().text("通讯录")', 8)
-        if result:
-            contacts_page_flag = driver.is_displayed('id=com.tencent.mm:id/ll', 3)
-            if contacts_page_flag:
-                return True
-            else:
-                driver.click('ui=new UiSelector().text("通讯录")')
-            return True
-        else:
-            current_activity = driver.current_activity
-            if current_activity == 'com.android.launcher2.Launcher':
-                driver.launch_app()
-            else:
-                driver.back()
-    logging.error('返回首页失败')
+
 
 
 def move2user_display(driver, user_name):

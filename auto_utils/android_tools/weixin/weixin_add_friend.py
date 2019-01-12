@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-import re
 from auto_utils.android_tools.android_driver import *
+from auto_utils.android_tools.weixin.command import *
 
 
 def search_tel_add_friend():
@@ -148,7 +148,7 @@ def group_chat_add_friend():
                             driver.click('ui=new UiSelector().text("发送")')
                         except Exception as e:
                             logging.error(e)
-                        if driver.is_displayed('aid=返回'):
+                        if driver.is_displayed('aid=返回', 20):
                             driver.click('aid=返回')
                             back_flag = driver.is_displayed('ui=new UiSelector().textContains("聊天成员")', 20)
                             if not back_flag:
@@ -165,20 +165,7 @@ def group_chat_add_friend():
                 swipe_num += 1
                 logging.info('swipe2down!')
                 driver.swipe2down()
-        while True:
-            driver.back()
-            if driver.is_displayed('ui=new UiSelector().text("查看全部群成员")', 5):
-                for i in range(3):
-                    driver.swipe2down()
-                    if driver.is_displayed('ui=new UiSelector().text("删除并退出")', 5):
-                        driver.click('id=android:id/summary')
-                        driver.type('id=com.tencent.mm:id/ji', '飞燕')
-                        driver.click('ui=new UiSelector().text("确定")')
-                        break
-            if driver.is_displayed('ui=new UiSelector().text("通讯录")', 5):
-                # driver.click('ui=new UiSelector().text("通讯录")')
-                # driver.click('ui=new UiSelector().text("群聊")')
-                break
+        back_contacts_page(driver)
 
 
 def in_group_chat(driver):
