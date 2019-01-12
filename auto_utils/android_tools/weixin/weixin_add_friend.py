@@ -172,12 +172,8 @@ def in_group_chat(driver):
     error = driver.is_displayed('ui=new UiSelector().text("等待")', 3)
     if error:
         driver.click('ui=new UiSelector().text("等待")')
-    for i in range(4):
-        driver.back()
-        if driver.is_displayed('ui=new UiSelector().text("通讯录")', 5):
-            driver.click('ui=new UiSelector().text("通讯录")')
-            driver.click('ui=new UiSelector().text("群聊")')
-            break
+    back_contacts_page(driver)
+    driver.click('ui=new UiSelector().text("群聊")')
     if driver.is_displayed('ui=new UiSelector().resourceId("android:id/text1").text("群聊")', 5):
         logging.info('in group success')
         return True
