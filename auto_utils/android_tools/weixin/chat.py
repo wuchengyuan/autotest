@@ -1,7 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 from auto_utils.android_tools.android_driver import *
-from auto_utils.android_tools.weixin import *
+from auto_utils.android_tools.weixin.command import *
+
 
 def send_collect_info(driver, name):
     driver.click('ui=new UiSelector().text("发消息")')
@@ -46,9 +47,6 @@ def del_friend(driver, name):
             pass
     except Exception as e:
         logging.error('%s 删除失败，错误信息：%s' % (name, e))
-
-
-
 
 
 def move2user_display(driver, user_name):
