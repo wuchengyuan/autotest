@@ -37,6 +37,7 @@ def send_mail(mail_host, mail_user, mail_pass, sender, receivers, file_path):
     except TimeoutError:
         logging.error('服务器连接超时，请检查发件服务器是否正确！')
 
+
 if __name__ == '__main__':
     mail_host = 'smtp.exmail.qq.com'
     mail_user = 'wuchengyuan@idvert.com1'
