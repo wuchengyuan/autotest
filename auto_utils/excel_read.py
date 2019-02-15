@@ -1,5 +1,4 @@
 # -*- encoding: utf-8 -*-
-import logging
 import xlrd
 from auto_utils.common import *
 
@@ -31,7 +30,10 @@ class Excel:
         :param name:Excel文件名称
         :return:
         """
-        file_path = os.path.join(self.__project_path, r"data\%s" % name)
+        if os.path.isfile(name):
+            file_path = name
+        else:
+            file_path = os.path.join(self.__project_path, r"data\%s" % name)
         if os.path.isfile(file_path):
             self.__excel_file = file_path
         else:
